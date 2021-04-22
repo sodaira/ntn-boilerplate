@@ -1,4 +1,4 @@
-name: DeployToNetlify
+name: Netlify publish
 
 on:
   push:
