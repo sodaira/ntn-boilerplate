@@ -1,0 +1,28 @@
+name: Amazon S3 publish
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: 14.x
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - name: Publish
+      env:
+        S3_UPLOAD_BUCKET: ${{ secrets.S3_UPLOAD_BUCKET }}
+      run: |
+        aws s3 cp ./dist/* s3://$S3_UPLOAD_BUCKET/ --quiet
