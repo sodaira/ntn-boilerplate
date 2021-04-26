@@ -2,7 +2,7 @@ name: Netlify publish
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
 
 jobs:
   deployToNetlify:
