@@ -297,7 +297,7 @@
                 <div class="RecruitBand">
                     <p class="RecruitBand__head">自分の強みを、<br class="u-none-pc">活かす。</p>
                     <p class="RecruitBand__body">現在弊社では新しい仲間を<br class="u-none-pc">募集しております。<br>少しでも興味を持っていただけるようでしたら、お気軽にご応募下さい。</p>
-                    <a class="btn--orenge" href="/Recruit">採用情報ページへ<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    <nuxt-link to="/recruit" class="btn--orenge">採用情報ページへ<i class="fa fa-angle-right" aria-hidden="true"></i></nuxt-link>
                 </div>
             </section>
         </div>
