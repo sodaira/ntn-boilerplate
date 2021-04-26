@@ -21,7 +21,6 @@ export default {
     lang: SITE_INFO.sitelang || 'en-US'
   },
   /*
-   ** Headers of the page
    */
   head: {
     title: SITE_INFO.sitename || process.env.npm_package_name || '',
@@ -52,6 +51,7 @@ export default {
         onload: `this.media='all'`
       }
     ], // ? Imports the font 'Inter', can be optimized by the netlify plugin 'Subfont' by uncommenting it in `netlify.toml`
+    script: [{ src: 'js/top.js' }, { src: 'js/site.js' }, { src: 'js/script.js' }, { src: 'js/lib/jquery-3.2.1.min.js' }, { src: 'js/lib/jquery.magnific-popup.min.js' }, { src: 'js/lib/slick.min.js' }],
     noscript: [
       {
         innerHTML:
@@ -67,7 +67,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@/assets/css/main.pcss'],
+  css: ['@/assets/css/style.css', '@/assets/css/styles.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -102,7 +102,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   },
   /*
    ** Custom additions configuration
