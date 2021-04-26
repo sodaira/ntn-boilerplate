@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="wrapper">
+    <main role="main" class="pb-3">
       <Header />
-      <nuxt />
-    </div>
-    <Footer />
+        <main class="Main">
+          <nuxt />
+        </main>
+      <Footer />
+    </main>
   </div>
 </template>

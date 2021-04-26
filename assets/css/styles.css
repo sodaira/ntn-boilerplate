@@ -1949,9 +1949,11 @@ address {
   _::-webkit-full-page-media, _:future, :root .Card::after {
     padding-top: calc(100% + 3.91134vw + 3.91134vw); } }
 
-@media screen and (min-width: 768px) and (max-width: 899px) {
+/*
+ @media screen and (min-width: 768px) and (max-width: 899px) {
   _::-webkit-full-page-media, _:future, :root .Card::after {
     padding-top: calc(100% + $card_py_tablet); } }
+*/
 
 .Card__head {
   position: relative;
@@ -2498,7 +2500,7 @@ address {
     padding: 80px 0 3.95833em; }
     @media screen and (min-width: 768px) {
       .Main--policy {
-        padding: 160px 0 95px; } }
+        padding: 100px 0 95px; } }
 
 .Nav {
   display: none; }

@@ -67,7 +67,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@/assets/css/style.css', '@/assets/css/styles.css'],
+  css: ['@/assets/css/styles.css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -112,7 +112,7 @@ export default {
     dir: 'content'
   },
   tailwindcss: {
-    cssPath: '~/assets/css/main.pcss',
+    //cssPath: '~/assets/css/main.pcss',
     exposeConfig: false // enables `import { theme } from '~tailwind.config'`
   },
   purgeCSS: {
