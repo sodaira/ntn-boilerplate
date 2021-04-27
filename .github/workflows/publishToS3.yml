@@ -1,6 +1,6 @@
 name: s3-deploy-sample
 on:
-  pull_request:
+  push:
     branches: [s3]
 
 jobs:
