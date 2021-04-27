@@ -1,7 +1,7 @@
 name: Amazon S3 publish
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ master, develop, s3 ]
 
 jobs:
   deployToS3:
