@@ -259,35 +259,37 @@
 </template>
 
 <script>
-  methods: {
-    window:onload = function() {
-      /* アコーディオン表示処理 */
-      $('.js-trigger-panel').click(function(){
-        // 親タグにクラス追加/削除
-        $(this).parent('.js-target-panel').toggleClass('is-disp');
-        // 内容表示
-        $(this).next().slideToggle(300);
-      });
+  export default {
+    mounted() {
+      this.$nextTick(() => {
+        /* アコーディオン表示処理 */
+        $('.js-trigger-panel').click(function(){
+          // 親タグにクラス追加/削除
+          $(this).parent('.js-target-panel').toggleClass('is-disp');
+          // 内容表示
+          $(this).next().slideToggle(300);
+        });
 
-      /* スライダー処理 */
-      $('#slider').slick({
-        centerMode: true,
-        variableWidth: true,
-        infinite: true,
-        draggable: false,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        speed: 600,
-        responsive: [
-          {
-            breakpoint: 1000,
-            settings: {
-              centerMode: false,
-              variableWidth: false
+        /* スライダー処理 */
+        $('#slider').slick({
+          centerMode: true,
+          variableWidth: true,
+          infinite: true,
+          draggable: false,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          speed: 600,
+          responsive: [
+            {
+              breakpoint: 1000,
+              settings: {
+                centerMode: false,
+                variableWidth: false
+              }
             }
-          }
-        ]
-      });
+          ]
+        });
+      })
     }
   }
 </script>
