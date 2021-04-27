@@ -10,8 +10,7 @@ export default {
   target: 'static',
   components: true,
   generate: {
-    fallback: true,
-    subFolders: false
+    fallback: true
   },
   // ? The env Property: https://nuxtjs.org/api/configuration-env/
   env: {
