@@ -5,9 +5,6 @@ on:
 
 jobs:
   deploy:
-    # ジョブは並行で動くので前後関係の指定が必要
-    needs: build
-
     runs-on: ubuntu-latest
 
     strategy:
