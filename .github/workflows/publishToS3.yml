@@ -4,33 +4,59 @@ on:
     branches: [master, develop, s3]
 
 jobs:
-  deployToS3:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.5.0]
+
+    steps:
+      # masterブランチをチェックアウト
+      - uses: actions/checkout@v2
+      # nodeでパッケージをインストール&ビルド
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build
+      # ビルド結果をdeployジョブに渡すためにアップロード
+      - name: Upload build result
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: public/
+
+  deploy:
+    # ジョブは並行で動くので前後関係の指定が必要
+    needs: build
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      # ビルド結果をダウンロード
+      - name: Download build result
+        uses: actions/download-artifact@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
-
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - run: npm ci
-      - run: npm run generate --if-present
-
+          name: build
+          path: public/
+      # S3にアップロード
       - name: Publish to AWS S3
         uses: opspresso/action-s3-sync@master
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "ap-northeast-1"
-          FROM_PATH: "./dist"
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          FROM_PATH: "public/"
           DEST_PATH: "s3://s3.lincraft-dev.com/"
           OPTIONS: "--acl public-read"
+      # CloudFrontのキャッシュクリア
+      - name: Clear cache in CloudFront
+        uses: chetan/invalidate-cloudfront-action@v1.2
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: "/*"
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
