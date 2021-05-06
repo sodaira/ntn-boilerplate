@@ -31,7 +31,6 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           FROM_PATH: "./dist"
           DEST_PATH: "s3://s3.lincraft-dev.com/"
-          OPTIONS: "--acl public-read"
       # CloudFrontのキャッシュクリア
       - name: Clear cache in CloudFront
         uses: chetan/invalidate-cloudfront-action@v1.2
