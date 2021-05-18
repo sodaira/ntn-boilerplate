@@ -33,9 +33,7 @@
         <h4 class="ModalItem__head">緊急事態宣言に伴う在宅勤務等のお知らせ</h4>
         <p></p><p>新型コロナウイルス感染拡大防止の為、弊社は2020年4月より可能な限り在宅勤務を推進しておりましたが、この度の緊急事態宣言に伴い、改めて在宅勤務及び非対面でのお打ち合わせを可能な限り進めてまいります。</p><p>お取引様におかれましては、ご不便をお掛けしてしまう部分もあるかと思いますが、従業員および関係者の安全を優先し、感染リスクの軽減及び安定した事業継続を目指してまいります。</p><p>何卒ご理解頂けますようお願い申し上げます。<br></p><p>----------------------------------------------------------------------<br>【期間】2021年01月08日（金）〜<br></p>【基本方針】<br>・本社において必要最低限の営業・事務機能を除き、在宅勤務と致します。<br>・打合せや訪問は、原則として電話、Web会議など非対面で実施させて頂きます。<br>・業務内容によりやむを得ず本社出社する従業員については、感染予防の為のマスク配布や時差出勤を行います。<br>・社内感染予防の対策として、マスク配布、出入り口におけるアルコール消毒を実施しております。<br>----------------------------------------------------------------------<p>ご不便をお掛けいたしますが、何卒、宜しくお願い致します。</p><p></p>
       </div>
-
             <div class="News__body" id="news_target">
-
                     <div class="NewsList">
                         <h3 class="NewsList__head">2021</h3>
 
@@ -441,29 +439,29 @@
                         <li class="err__item" id="err_inquiry">お問い合わせ項目 が入力されていません。</li>
                     </ul>
 
-<form action="/" class="Form" method="post">                        <dl class="Form__list">
+<form class="Form" @submit.prevent="sendInquiry">                        <dl class="Form__list">
                             <!-- 御社名 -->
                             <dt class="Form__tarm"><label for="MailForm_CompanyName">御社名</label><span class="color_pink">*</span></dt>
                             <dd class="Form__data">
-                                <input class="Form__input" data-val="true" data-val-required="The 御社名 field is required." id="MailForm_CompanyName" name="MailForm.CompanyName" required="required" type="text" value="">
+                                <input class="Form__input" data-val="true" data-val-required="The 御社名 field is required." id="MailForm_CompanyName" name="MailForm.CompanyName" required="required" type="text" value="" v-model="CorpName">
                             </dd>
 
                             <!-- 部署名 -->
                             <dt class="Form__tarm"><label for="MailForm_DepartmentName">部署名</label></dt>
                             <dd class="Form__data">
-                                <input class="Form__input" id="MailForm_DepartmentName" name="MailForm.DepartmentName" type="text" value="">
+                                <input class="Form__input" id="MailForm_DepartmentName" name="MailForm.DepartmentName" type="text" value="" v-model="DeptName">
                             </dd>
 
                             <!-- 氏名 -->
                             <dt class="Form__tarm"><label for="MailForm_Name">氏名</label><span class="color_pink">*</span></dt>
                             <dd class="Form__data">
-                                <input class="Form__input" data-val="true" data-val-required="The 氏名 field is required." id="MailForm_Name" name="MailForm.Name" required="required" type="text" value="">
+                                <input class="Form__input" data-val="true" data-val-required="The 氏名 field is required." id="MailForm_Name" name="MailForm.Name" required="required" type="text" value="" v-model="UserName">
                             </dd>
 
                             <!-- メールアドレス -->
                             <dt class="Form__tarm"><label for="MailForm_Email">メールアドレス</label><span class="color_pink">*</span></dt>
                             <dd class="Form__data">
-                                <input class="Form__input" data-val="true" data-val-required="The メールアドレス field is required." id="MailForm_Email" name="MailForm.Email" required="required" type="text" value="">
+                                <input class="Form__input" data-val="true" data-val-required="The メールアドレス field is required." id="MailForm_Email" name="MailForm.Email" required="required" type="text" value="" v-model="MailAddress">
                                 <p class="Form__text">確認のため、もう一度入力してください。</p>
                                 <input class="Form__input" data-val="true" data-val-equalto="※メールアドレスと確認用メールアドレスが異なっています。" data-val-equalto-other="*.Email" id="MailForm_ConfirmEmail" name="MailForm.ConfirmEmail" required="required" type="text" value="">
                                 <span class="field-validation-valid" data-valmsg-for="MailForm.ConfirmEmail" data-valmsg-replace="true" style="color:red;"></span>
@@ -472,7 +470,7 @@
                             <!-- 電話番号 -->
                             <dt class="Form__tarm"><label for="MailForm_PhoneNumber">電話番号</label></dt>
                             <dd class="Form__data">
-                                <input class="Form__input" id="MailForm_PhoneNumber" name="MailForm.PhoneNumber" type="text" value="">
+                                <input class="Form__input" id="MailForm_PhoneNumber" name="MailForm.PhoneNumber" type="text" value="" v-model="PhoneNumber">
                             </dd>
 
                             <!-- 住所 -->
@@ -480,40 +478,26 @@
                             <dd class="Form__data">
                                 <div class="l-row">
                                     <span class="Form__text--postal"><label for="MailForm_PostalCode">〒</label></span>
-                                    <input class="Form__input Form__input-postal" id="MailForm_PostalCode" maxlength="8" name="MailForm.PostalCode" type="text" value="">
+                                    <input class="Form__input Form__input-postal" id="MailForm_PostalCode" maxlength="8" name="MailForm.PostalCode" type="text" value="" v-model="PostalCode">
                                 </div>
-                                <input class="Form__input Form__input-mt_m" id="MailForm_Address1" name="MailForm.Address1" type="text" value="">
-                                <input class="Form__input Form__input-mt_m" id="MailForm_Address2" name="MailForm.Address2" type="text" value="">
+                                <input class="Form__input Form__input-mt_m" id="MailForm_Address1" name="MailForm.Address1" type="text" value="" v-model="Address1">
+                                <input class="Form__input Form__input-mt_m" id="MailForm_Address2" name="MailForm.Address2" type="text" value="" v-model="Address2">
                             </dd>
 
                             <!-- お問い合わせ項目 -->
                             <dt class="Form__tarm"><label for="MailForm_InquiryItems">お問い合わせ項目</label><span class="color_pink">*</span></dt>
                             <dd class="Form__data">
-
-                                        <span class="Form__check">
-                                            <input class="Form__input inquiry_check" data-val="true" data-val-required="The Boolean field is required." id="inquiry_0" name="MailForm.InquiryItems[0]" type="checkbox" value="true">
-                                            <label for="inquiry_0">開発のご依頼</label>
-                                        </span>
-                                        <span class="Form__check">
-                                            <input class="Form__input inquiry_check" data-val="true" data-val-required="The Boolean field is required." id="inquiry_1" name="MailForm.InquiryItems[1]" type="checkbox" value="true">
-                                            <label for="inquiry_1">協業に関するお問い合わせ</label>
-                                        </span>
-                                        <span class="Form__check">
-                                            <input class="Form__input inquiry_check" data-val="true" data-val-required="The Boolean field is required." id="inquiry_2" name="MailForm.InquiryItems[2]" type="checkbox" value="true">
-                                            <label for="inquiry_2">採用に関するお問い合わせ</label>
-                                        </span>
-                                        <span class="Form__check">
-                                            <input class="Form__input inquiry_check" data-val="true" data-val-required="The Boolean field is required." id="inquiry_3" name="MailForm.InquiryItems[3]" type="checkbox" value="true">
-                                            <label for="inquiry_3">その他</label>
-                                        </span>
+                                <span class="Form__check" v-for="(summary, i) in SummaryItems" :key="i">
+                                    <input :id="'inquiry_' + i" class="Form__input inquiry_check" data-val="true" data-val-required="The Boolean field is required." :value="summary" v-model="SummaryList" type="checkbox" value="true">
+                                    <label :for="'inquiry_' + i">{{summary}}</label>
+                                </span>
                             </dd>
 
                             <!-- お問い合わせ内容 -->
                             <dt class="Form__tarm"><label for="MailForm_InquiryDetail">お問い合わせ内容</label></dt>
                             <dd class="Form__data">
-                                <textarea class="Form__input u-w-100 u-h-a" cols="100" id="MailForm_InquiryDetail" name="MailForm.InquiryDetail" rows="8"></textarea>
+                                <textarea class="Form__input u-w-100 u-h-a" cols="100" id="MailForm_InquiryDetail" name="MailForm.InquiryDetail" rows="8" v-model="Detail"></textarea>
                             </dd>
-
                         </dl>
 
 <!--
@@ -539,3 +523,50 @@
 
   </div>
 </template>
+
+<script>
+import axios from "axios"
+
+export default {
+    data() {
+        return {
+            CorpName: '',
+            DeptName: '',
+            MailAddress: '',
+            PhoneNumber: '',
+            SummaryItems: ['開発のご依頼', '協業に関するお問い合わせ', '採用に関するお問い合わせ', 'その他'],
+            SummaryList: [],
+            PostalCode: '',
+            Address1: '',
+            Address2: '',
+            Detail: '',
+            UserName: '',
+        }
+    },
+    methods: {
+        async sendInquiry() {
+            console.log('call sendInquiry');
+            const postData = {
+                CorpName: this.CorpName,
+                DeptName: this.DeptName,
+                MailAddress: this.MailAddress,
+                PhoneNumber: this.PhoneNumber,
+                SummaryList: this.SummaryList.map(v => ({'Summary': v})),
+                PostalCode: this.PostalCode,
+                Address1: this.Address1,
+                Address2: this.Address2,
+                Detail: this.Detail,
+                UserName: this.UserName,
+            };
+
+            console.log(postData);
+           const res = await axios.post('https://fb70qd6kv2.execute-api.ap-northeast-1.amazonaws.com/develop/send', postData, {headers : {'X-API-Key' : '3RD0yu5cbe4yAF3yHWlGj5qETCR30OCP6wsxCJH6' }})
+           .catch(err => {
+               console.log(err.response);
+           });
+           console.log(res);
+           window.alert('正常終了');
+        }
+    }
+}
+</script>
